@@ -18,16 +18,6 @@ resource "aws_subnet" "boundary_db_demo_subnet" {
   }
 }
 
-resource "aws_subnet" "boundary_db_demo_subnet2" {
-  vpc_id                  = aws_vpc.boundary_db_demo_vpc.id
-  cidr_block              = var.aws_subnet_cidr2
-  map_public_ip_on_launch = true
-  availability_zone       = var.availability_zone2
-  tags = {
-    "Name" = "Boundary DB Demo Public Subnet 2"
-  }
-}
-
 # AWS resource to create the Internet Gateway
 resource "aws_internet_gateway" "boundary_db_demo_ig" {
   vpc_id = aws_vpc.boundary_db_demo_vpc.id
@@ -56,8 +46,4 @@ resource "aws_route_table_association" "boundary_db_demo_rt_associate" {
   route_table_id = aws_route_table.boundary_db_demo_rt.id
 }
 
-resource "aws_route_table_association" "boundary_db_demo_rt_associate2" {
-  subnet_id      = aws_subnet.boundary_db_demo_subnet2.id
-  route_table_id = aws_route_table.boundary_db_demo_rt.id
 
-}
